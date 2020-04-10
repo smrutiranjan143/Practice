@@ -27,8 +27,11 @@ public class MailDetails implements Serializable {
 	@Column(name = "maildefaultevent_id")
 	private Integer mailDefaultEventId;
 
-	@Column(name = "event_desc")
+	@Column(name = "mail_desc")
 	private String eventDescription;
+	
+	@Column(name = "mail_subject")
+	private String mailSubject;
 
 	@Column(name = "mail_body")
 	private String mailBody;
@@ -166,5 +169,13 @@ public class MailDetails implements Serializable {
 
 	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getMailSubject() {
+		return mailSubject;
+	}
+
+	public void setMailSubject(String mailSubject) {
+		this.mailSubject = mailSubject;
 	}
 }
