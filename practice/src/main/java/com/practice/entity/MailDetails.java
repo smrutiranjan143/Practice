@@ -45,9 +45,6 @@ public class MailDetails implements Serializable {
 	@Column(name = "mail_bcc")
 	private String[] mailBCC;
 
-	@Column(name = "user_id")
-	private Integer userId;
-
 	@Column(name = "create_id")
 	private Integer createId;
 
@@ -121,14 +118,6 @@ public class MailDetails implements Serializable {
 
 	public void setMailBCC(String[] mailBCC) {
 		this.mailBCC = mailBCC;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 
 	public Integer getCreateId() {

@@ -79,7 +79,6 @@ public class UserServiceImpl implements UserService {
 			mapMailInfo.put(PracticeConstants.MAIL_TO, userDetails.getEmail());
 			mapMailInfo.put(PracticeConstants.MAIL_CC, mailCc);
 			mapMailInfo.put(PracticeConstants.MAIL_BCC, mailBcc);
-			mapMailInfo.put(PracticeConstants.MAIL_USER_ID, userDetails.getUserId());
 
 			if (userDetails.getSalutationId() != null && userDetails.getSalutationId() > 0) {
 				Salutation salutation = salutationRepo.findById(userDetails.getSalutationId()).orElse(null);

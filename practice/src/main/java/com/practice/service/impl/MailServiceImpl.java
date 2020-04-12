@@ -79,7 +79,6 @@ public class MailServiceImpl implements MailService {
 						if (mapMailInfo.get(PracticeConstants.MAIL_BCC) != null) {
 							mailDetails.setMailBCC((String[]) mapMailInfo.get(PracticeConstants.MAIL_BCC));
 						}
-						mailDetails.setUserId((Integer) mapMailInfo.get(PracticeConstants.MAIL_USER_ID));
 						mailDetails.setCreateId(PracticeConstants.DEFAULT_CREATE_ID);
 						mailDetails.setCreateDate(PracticeUtil.getCurrentDateTime());
 						mailDetails.setUpdateId(PracticeConstants.DEFAULT_CREATE_ID);

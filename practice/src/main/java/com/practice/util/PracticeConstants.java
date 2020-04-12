@@ -7,7 +7,6 @@ public class PracticeConstants {
 	public static final String MAIL_TO = "mailTo";
 	public static final String MAIL_CC = "mailCC";
 	public static final String MAIL_BCC = "mailBCC";
-	public static final String MAIL_USER_ID = "mailUserId";
 	public static final int MAIL_EVENT_ON_USER_REGISTRATION = 1;
 	public static final String MAIL_SENDING_USERNAME = "nayak.rakesh138@gmail.com";
 	public static final String MAIL_SENDING_PASSWORD = "jlqxdzuqjzslvztx";
