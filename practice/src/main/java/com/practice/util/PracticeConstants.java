@@ -17,5 +17,10 @@ public class PracticeConstants {
 	public static final String MAIL_SMTP_PORT = "mail.smtp.port";
 	public static final String TRUE = "true";
 	public static final String SMTP_GMAIL = "smtp.gmail.com";
-	public static final String GMAIL_PORT = "587"; 
+	public static final String GMAIL_PORT = "587";
+	public static final String MAIL_LEFT_KEY = "<%";
+	public static final String MAIL_RIGHT_KEY = "%>";
+	public static final String USER_FULL_NAME = "USER_FULL_NAME";
+	public static final String COMMA = ",";
+	public static final String SPACE = " ";
 }

@@ -2,13 +2,13 @@ package com.practice.dto;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable{
+public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 2422753976886553859L;
-	
+
 	private String userCode;
 	private String password;
 	private String cpassword;
-	private String salutation;
+	private Integer salutationId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -31,12 +31,20 @@ public class UserDTO implements Serializable{
 		this.password = password;
 	}
 
-	public String getSalutation() {
-		return salutation;
+	public String getCpassword() {
+		return cpassword;
 	}
 
-	public void setSalutation(String salutation) {
-		this.salutation = salutation;
+	public void setCpassword(String cpassword) {
+		this.cpassword = cpassword;
+	}
+
+	public Integer getSalutationId() {
+		return salutationId;
+	}
+
+	public void setSalutationId(Integer salutationId) {
+		this.salutationId = salutationId;
 	}
 
 	public String getFirstName() {

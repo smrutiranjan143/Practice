@@ -11,7 +11,7 @@
 			<input type="text" name="userCode" placeholder="Enter Usercode here"><br/>
 			<input type="password" name="password" placeholder="Enter Password here"><br/>
 			<input type="password" name="cPassword" placeholder="Enter Confirm Password here"><br/>
-			<input type="text" name="salutation" placeholder="Enter Salutation here"><br/>
+			<input type="text" name="salutationId" placeholder="Enter Salutation here" onclick="matchpwd()"><br/>
 			<input type="text" name="firstName" placeholder="Enter First Name here"><br/>
 			<input type="text" name="middleName" placeholder="Enter Middle Name here"><br/>
 			<input type="text" name="lastName" placeholder="Enter Last Name here"><br/>

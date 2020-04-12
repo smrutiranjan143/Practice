@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.practice.dto.UserDTO;
+import com.practice.entity.Salutation;
 import com.practice.entity.Userdetails;
 import com.practice.exception.ServiceException;
+import com.practice.repository.SalutationRepo;
 import com.practice.repository.UserDetailsRepo;
 import com.practice.service.MailService;
 import com.practice.service.UserService;
@@ -18,9 +20,9 @@ import com.practice.util.PracticeConstants;
 import com.practice.util.PracticeUtil;
 
 @Service
-public class UserdetailsServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
-	Logger logger = LoggerFactory.getLogger(UserdetailsServiceImpl.class);
+	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	// This is for service
 	@Autowired
@@ -30,6 +32,9 @@ public class UserdetailsServiceImpl implements UserService {
 	@Autowired
 	private UserDetailsRepo userdetailsRepo;
 
+	@Autowired
+	private SalutationRepo salutationRepo;
+
 	@Override
 	public Integer insertUser(UserDTO userDTO) {
 		Integer userId = 0;
@@ -37,7 +42,7 @@ public class UserdetailsServiceImpl implements UserService {
 			Userdetails userdetails = new Userdetails();
 			userdetails.setUserCode(userDTO.getUserCode());
 			userdetails.setPassword(userDTO.getPassword());
-			// userdetails.setSalutationId(userDTO.getSalutation());
+			userdetails.setSalutationId(userDTO.getSalutationId());
 			userdetails.setFirstName(userDTO.getFirstName());
 			userdetails.setMiddleName(userDTO.getMiddleName());
 			userdetails.setLastName(userDTO.getLastName());
@@ -68,12 +73,29 @@ public class UserdetailsServiceImpl implements UserService {
 		Map<String, Object> mapMailParameterInfo = new HashMap<>();
 		String[] mailCc = null;
 		String[] mailBcc = null;
+		StringBuilder sb = new StringBuilder();
 		try {
 			mapMailInfo.put(PracticeConstants.MAIL_EVENT_ID, PracticeConstants.MAIL_EVENT_ON_USER_REGISTRATION);
 			mapMailInfo.put(PracticeConstants.MAIL_TO, userDetails.getEmail());
 			mapMailInfo.put(PracticeConstants.MAIL_CC, mailCc);
 			mapMailInfo.put(PracticeConstants.MAIL_BCC, mailBcc);
 			mapMailInfo.put(PracticeConstants.MAIL_USER_ID, userDetails.getUserId());
+
+			if (userDetails.getSalutationId() != null && userDetails.getSalutationId() > 0) {
+				Salutation salutation = salutationRepo.findById(userDetails.getSalutationId()).orElse(null);
+				sb.append(salutation.getSalutationValue());
+			}
+			if (userDetails.getFirstName() != null && !userDetails.getFirstName().isEmpty()) {
+				sb.append(PracticeConstants.SPACE).append(userDetails.getFirstName());
+			}
+			if (userDetails.getMiddleName() != null && !userDetails.getMiddleName().isEmpty()) {
+				sb.append(PracticeConstants.SPACE).append(userDetails.getMiddleName());
+			}
+			if (userDetails.getLastName() != null && !userDetails.getLastName().isEmpty()) {
+				sb.append(PracticeConstants.SPACE).append(userDetails.getLastName());
+			}
+
+			mapMailParameterInfo.put(PracticeConstants.USER_FULL_NAME, sb.toString());
 
 			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {
