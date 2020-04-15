@@ -3,8 +3,6 @@ package com.practice.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +15,13 @@ import com.practice.repository.UserDetailsRepo;
 import com.practice.service.MailService;
 import com.practice.service.UserService;
 import com.practice.util.PracticeConstants;
+import com.practice.util.PracticeLogging;
 import com.practice.util.PracticeUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final PracticeLogging logger = PracticeLogging.getLogger(UserServiceImpl.class);
 
 	// This is for service
 	@Autowired
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
 			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {
-			logger.error("error in sending mail");
+			logger.debug("error in sending mail");
 		}
 	}
 }

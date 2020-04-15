@@ -1,18 +1,17 @@
 package com.practice.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.practice.entity.Country;
 import com.practice.repository.CountryRepo;
 import com.practice.service.MasterService;
+import com.practice.util.PracticeLogging;
 
 @Service
 public class MasterServiceImpl implements MasterService {
 
-	Logger logger = LoggerFactory.getLogger(MasterService.class);
+	private static final PracticeLogging logger = PracticeLogging.getLogger(MasterServiceImpl.class);
 
 	@Autowired
 	private CountryRepo countryRepo;

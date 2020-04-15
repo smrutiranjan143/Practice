@@ -19,8 +19,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -34,11 +32,12 @@ import com.practice.repository.MailDefaultParameterRepo;
 import com.practice.repository.MailDetailsRepo;
 import com.practice.service.MailService;
 import com.practice.util.PracticeConstants;
+import com.practice.util.PracticeLogging;
 import com.practice.util.PracticeUtil;
 
 @Service
 public class MailServiceImpl implements MailService {
-	Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
+	private static final PracticeLogging logger = PracticeLogging.getLogger(MailServiceImpl.class);
 
 	@Autowired
 	private MailDefaultEventRepo mailDefaultEventRepo;
