@@ -2,6 +2,7 @@
 <configuration>
 
 	<property name="HOME_LOG" value="logs/app.log" />
+	<property name="ERROR_LOG" value="logs/error.log" />
  
     <!-- Send debug messages to System.out -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -28,6 +29,23 @@
             <MaxFileSize>5MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
+    
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${ERROR_LOG}</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+  
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${ERROR_LOG}.%i.log.zip</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+  
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>5MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
  
     <logger name="com.practice" level="INFO" additivity="false">
             <appender-ref ref="STDOUT" />
@@ -40,6 +58,6 @@
     </root>
 	
 	<root level="error">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="ERROR" />
     </root>
 </configuration>
