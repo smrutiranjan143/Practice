@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -50,11 +50,11 @@ public class City implements Serializable {
 
 	@Column(name = "is_active")
 	private Integer isActive;
-	
-	@OneToMany
+
+	@Transient
 	private List<Zip> zips;
 
-	@OneToMany
+	@Transient
 	private List<Address> addresses;
 
 	public Integer getCityId() {

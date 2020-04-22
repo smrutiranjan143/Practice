@@ -44,7 +44,7 @@ public class MasterController {
 		return countryId;
 	}
 
-	@PostMapping(value = "/getStates", produces = "application/json", consumes = "application/json")
+	@PostMapping(value = "/getStates")
 	@ResponseBody
 	public List<State> getStatesByCountryId(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("countryId") Integer countryId) {

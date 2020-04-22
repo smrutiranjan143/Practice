@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,7 +28,7 @@ public class MailDefaultEvent implements Serializable {
 
 	@Column(name = "event_desc")
 	private String eventDescription;
-	
+
 	@Column(name = "event_subject")
 	private String eventSubject;
 
@@ -53,11 +53,11 @@ public class MailDefaultEvent implements Serializable {
 
 	@Column(name = "is_active")
 	private Integer isActive;
-	
-	@OneToMany
+
+	@Transient
 	private List<MailDefaultParameter> defaultParameters;
 
-	@OneToMany
+	@Transient
 	private List<MailDetails> mailDetails;
 
 	public Integer getMailDefaultEventId() {

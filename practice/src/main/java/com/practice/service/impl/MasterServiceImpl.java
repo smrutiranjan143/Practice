@@ -43,7 +43,7 @@ public class MasterServiceImpl implements MasterService {
 		List<State> states = null;
 		try {
 			Integer status = PracticeConstants.ACTIVE_ROW;
-			states = stateRepo.findByCountryId(countryId,status);
+			states = stateRepo.findByCountryIdAndIsActive(countryId,status);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

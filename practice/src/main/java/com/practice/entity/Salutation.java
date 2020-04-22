@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -46,8 +46,8 @@ public class Salutation implements Serializable {
 
 	@Column(name = "is_active")
 	private Integer isActive;
-	
-	@OneToMany
+
+	@Transient
 	private List<Userdetails> users;
 
 	public Integer getSalutationId() {
