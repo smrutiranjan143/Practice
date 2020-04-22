@@ -1,11 +1,16 @@
 package com.practice.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.practice.entity.Country;
+import com.practice.entity.State;
 import com.practice.repository.CountryRepo;
+import com.practice.repository.StateRepo;
 import com.practice.service.MasterService;
+import com.practice.util.PracticeConstants;
 import com.practice.util.PracticeLogging;
 
 @Service
@@ -15,6 +20,9 @@ public class MasterServiceImpl implements MasterService {
 
 	@Autowired
 	private CountryRepo countryRepo;
+
+	@Autowired
+	private StateRepo stateRepo;
 
 	@Override
 	public Integer insertCountry(Country country) {
@@ -28,5 +36,17 @@ public class MasterServiceImpl implements MasterService {
 			logger.error("error", e);
 		}
 		return countryId;
+	}
+
+	@Override
+	public List<State> getStates(Integer countryId) {
+		List<State> states = null;
+		try {
+			Integer status = PracticeConstants.ACTIVE_ROW;
+			states = stateRepo.findByCountryId(countryId,status);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return states;
 	}
 }

@@ -94,6 +94,7 @@ public class UserServiceImpl implements UserService {
 			}
 
 			mapMailParameterInfo.put(PracticeConstants.USER_FULL_NAME, sb.toString());
+			mapMailParameterInfo.put(PracticeConstants.OTP, PracticeUtil.getOtp());
 
 			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {

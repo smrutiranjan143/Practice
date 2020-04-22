@@ -22,4 +22,7 @@ public class PracticeConstants {
 	public static final String USER_FULL_NAME = "USER_FULL_NAME";
 	public static final String COMMA = ",";
 	public static final String SPACE = " ";
+	public static final int MAX_RANGE_GENERATE_OTP = 999999;
+	public static final int MIN_RANGE_GENERATE_OTP = 100000;
+	public static final String OTP = "OTP";
 }

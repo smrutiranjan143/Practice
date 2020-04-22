@@ -1,5 +1,7 @@
 package com.practice.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.practice.entity.Country;
+import com.practice.entity.State;
 import com.practice.exception.ServiceException;
 import com.practice.service.MasterService;
 
@@ -38,5 +42,18 @@ public class MasterController {
 			logger.error("error", ex);
 		}
 		return countryId;
+	}
+
+	@PostMapping(value = "/getStates", produces = "application/json", consumes = "application/json")
+	@ResponseBody
+	public List<State> getStatesByCountryId(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("countryId") Integer countryId) {
+		List<State> states = null;
+		try {
+			states = masterService.getStates(countryId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return states;
 	}
 }
