@@ -11,12 +11,9 @@ import com.practice.repository.CountryRepo;
 import com.practice.repository.StateRepo;
 import com.practice.service.MasterService;
 import com.practice.util.PracticeConstants;
-import com.practice.util.PracticeLogging;
 
 @Service
 public class MasterServiceImpl implements MasterService {
-
-	private static final PracticeLogging logger = PracticeLogging.getLogger(MasterServiceImpl.class);
 
 	@Autowired
 	private CountryRepo countryRepo;
@@ -33,7 +30,6 @@ public class MasterServiceImpl implements MasterService {
 				countryId = country.getCountryId();
 			}
 		} catch (Exception e) {
-			logger.error("error", e);
 		}
 		return countryId;
 	}

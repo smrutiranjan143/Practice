@@ -32,12 +32,10 @@ import com.practice.repository.MailDefaultParameterRepo;
 import com.practice.repository.MailDetailsRepo;
 import com.practice.service.MailService;
 import com.practice.util.PracticeConstants;
-import com.practice.util.PracticeLogging;
 import com.practice.util.PracticeUtil;
 
 @Service
 public class MailServiceImpl implements MailService {
-	private static final PracticeLogging logger = PracticeLogging.getLogger(MailServiceImpl.class);
 
 	@Autowired
 	private MailDefaultEventRepo mailDefaultEventRepo;
@@ -88,11 +86,11 @@ public class MailServiceImpl implements MailService {
 							for (Entry<String, Object> entry : mapMailParameterInfo.entrySet()) {
 								for (MailDefaultParameter mailDefaultParameter : mailDefaultParameters) {
 									if (entry.getKey().equals(mailDefaultParameter.getParameterName())) {
-										mailBody = mailBody.replace(
+										mailBody = mailBody.replaceAll(
 												PracticeConstants.MAIL_LEFT_KEY
 														.concat(mailDefaultParameter.getParameterName())
 														.concat(PracticeConstants.MAIL_RIGHT_KEY),
-												(CharSequence) entry.getValue());
+												String.valueOf(entry.getValue()));
 									}
 								}
 							}
@@ -107,7 +105,6 @@ public class MailServiceImpl implements MailService {
 				System.out.println("Please give event id and mail to");
 			}
 		} catch (ServiceException se) {
-			logger.error("mail service impl", se);
 		}
 	}
 

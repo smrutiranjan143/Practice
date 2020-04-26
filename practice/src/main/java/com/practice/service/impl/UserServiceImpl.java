@@ -1,11 +1,8 @@
 package com.practice.service.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +19,6 @@ import com.practice.util.PracticeUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	// This is for service
 	@Autowired
@@ -62,9 +57,7 @@ public class UserServiceImpl implements UserService {
 			// end
 			userId = userdetails.getUserId();
 		} catch (ServiceException ex) {
-			logger.error("error", ex);
 		} catch (Exception ex) {
-			logger.error("error", ex);
 		}
 		return userId;
 	}
@@ -100,23 +93,6 @@ public class UserServiceImpl implements UserService {
 
 			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {
-			logger.debug("error in sending mail");
 		}
-	}
-
-	@Override
-	public Map<String, Object> getAllUserCode() {
-		Map<String, Object> mapIsActive = new HashMap<>();
-		try {
-			List<Userdetails> userDetails = userdetailsRepo.findByIsActive(PracticeConstants.ACTIVE_ROW);
-			if (userDetails != null && userDetails.size() > 0) {
-				for (Userdetails user : userDetails) {
-					mapIsActive.put(user.getUserCode(), user);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("error in " + logger.getName(), e);
-		}
-		return mapIsActive;
 	}
 }
