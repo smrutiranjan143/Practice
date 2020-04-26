@@ -15,13 +15,10 @@ import com.practice.repository.UserDetailsRepo;
 import com.practice.service.MailService;
 import com.practice.service.UserService;
 import com.practice.util.PracticeConstants;
-import com.practice.util.PracticeLogging;
 import com.practice.util.PracticeUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-	private static final PracticeLogging logger = PracticeLogging.getLogger(UserServiceImpl.class);
 
 	// This is for service
 	@Autowired
@@ -60,9 +57,7 @@ public class UserServiceImpl implements UserService {
 			// end
 			userId = userdetails.getUserId();
 		} catch (ServiceException ex) {
-			logger.error("error", ex);
 		} catch (Exception ex) {
-			logger.error("error", ex);
 		}
 		return userId;
 	}
@@ -98,7 +93,6 @@ public class UserServiceImpl implements UserService {
 
 			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {
-			logger.debug("error in sending mail");
 		}
 	}
 }
