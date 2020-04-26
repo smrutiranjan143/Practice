@@ -92,8 +92,8 @@ public class MailDetails implements Serializable {
 		return mailBody;
 	}
 
-	public void setMailBody(String mailBody) {
-		this.mailBody = mailBody;
+	public void setMailBody(Object mailBody2) {
+		this.mailBody = (String) mailBody2;
 	}
 
 	public String getMailTo() {
