@@ -7,4 +7,5 @@ import com.practice.dto.UserDTO;
 @Service
 public interface UserService {
 	public Integer insertUser(UserDTO userDTO);
+	public Map<String, Object> getAllUserCode();
 }

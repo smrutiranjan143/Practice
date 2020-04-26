@@ -1,6 +1,7 @@
 package com.practice.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +95,21 @@ public class UserServiceImpl implements UserService {
 			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {
 		}
+	}
+	
+	@Override
+	public Map<String, Object> getAllUserCode() {
+		Map<String, Object> mapIsActive = new HashMap<>();
+		try {
+			List<Userdetails> userDetails = userdetailsRepo.findByIsActive(PracticeConstants.ACTIVE_ROW);
+			if (userDetails != null && userDetails.size() > 0) {
+				for (Userdetails user : userDetails) {
+					mapIsActive.put(user.getUserCode(), user);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("error in " + logger.getName(), e);
+		}
+		return mapIsActive;
 	}
 }
