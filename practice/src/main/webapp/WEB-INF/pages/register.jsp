@@ -102,7 +102,7 @@ select[id=salutation]
 	
 
 	
-	function submitClick(){
+	function sssubmitClick(){
 		alert("Form Data will be submitted to Server.");	
 	}
 	
@@ -111,22 +111,25 @@ select[id=salutation]
 	}
 </script>
 </head>
-<body>
+<body ng-app ="myApp">
 
-
+	
 	<h1 style="text-align: center; color: aqua;">Register Here</h1>
-	<form style="text-align: center;" method="post" onsubmit="submitClick()" onreset="resetClick()">
-		<input type="text" name="userCode" id="userId"
-			placeholder="Enter UserCode here" required><br /> 
+	<hr/>
+	<div ng-controller ="registerController">
+	<form style="text-align: center;" name="registerForm" novalidate method="post" ng-submit="submitClick()" onreset="resetClick()">
+		<input type="text" name="userCode" ng-model="userCode" id="userId"
+			placeholder="Enter UserCode here" ng-required="true">
+			<span class="c1" ng-show="registerForm.userCode.$error.required && registerForm.userCode.$dirty">UserCode is required</span><br /> 
 			<input type="password" name="password" id="password"
-			placeholder="Enter Password here"  maxlength="25" required onfocus = "focusOn()" onblur = "focusOff()">
+			placeholder="Enter Password here" ng-model="password"  ng-maxlength="25" ng-required="true" onfocus = "focusOn()" onblur = "focusOff()">
 			<span style="font-size: 20px; display: table; margin-left: auto; 
 			margin-right: auto;" id="message"></span>
 			<input type="password" name="cPassword"
-			placeholder="Enter Confirm Password here" id="cPassword" maxlength="25" required onfocus="passwordCheck()" onblur="passwordSame()">
+			placeholder="Enter Confirm Password here" ng-model="cPassword" id="cPassword" ng-maxlength="25" ng-required="true" onfocus="passwordCheck()" onblur="passwordSame()">
 			<span style="font-size: 20px; display: table; margin-left: auto; 
 			margin-right: auto;" id="messages"></span> 
-			<select name="salutationId" id="salutation" style="color:#8e8e8e;" required>
+			<select name="salutationId" ng-model="salutationId" id="salutation" style="color:#8e8e8e;" ng-required="true">
 				<option value="-1"> Select the Salutation </option>
 				<option value="1">Mr.</option>
 				<option value="2">Mrs.</option>
@@ -134,21 +137,27 @@ select[id=salutation]
 				<option value="4">Other</option>
 			</select> 
 			<input type="text" name="firstName"
-			placeholder="Enter First Name here" id="fName" required> 
-			<input type="text" name="middleName" placeholder="Enter Middle Name here"
+			placeholder="Enter First Name here" ng-model="firstName"id="fName" ng-required="true"> 
+			<input type="text" name="middleName" ng-model="middleName" placeholder="Enter Middle Name here"
 			id="mName"> 
-			<input type="text" name="lastName"
-			placeholder="Enter Last Name here" id="lName" required> 
-			<input type="email" name="email" placeholder="Enter Email here" id="email"
-			required> 
+			<input type="text" name="lastName" ng-model="lastName"
+			placeholder="Enter Last Name here" id="lName" ng-required="true"> 
+			<input type="email" name="email" ng-model="email" placeholder="Enter Email here" id="email"
+			ng-required="true"> 
 			<input type="text" name="mobile"
-			placeholder="Enter Mobile here" id="mobile" maxlength="10" onblur= "validateMobile()" onkeypress="return AllowOnlyNumbers(event)" required>
+			placeholder="Enter Mobile here" ng-model="mobile" id="mobile" ng-maxlength="10" onblur= "validateMobile()" onkeypress="return AllowOnlyNumbers(event)" ng-required="true">
 			<span style=" color:red; font-size: 20px; display: table; margin-left: auto; 
 			margin-right: auto;" id="msg"></span> 
 			<br />
 		
-		<input type="submit" name="Submit" id="submit" class="submitbtn">&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" name="Submit" ng-disabled="registerForm.$invalid" submit" class="submitbtn">&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="reset" name="Reset" class="resetbtn">
 	</form>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+	<script src="../js/RegisterController.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+	
 </body>
 </html>
