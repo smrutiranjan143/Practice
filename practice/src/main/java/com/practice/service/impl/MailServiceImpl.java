@@ -47,7 +47,7 @@ public class MailServiceImpl implements MailService {
 	private MailDefaultParameterRepo mailDefaultParameterRepo;
 
 	@Override
-	public void sendMail(Map<String, Object> mapMailInfo, Map<String, Object> mapMailParameterInfo) {
+	public void tryToSendMail(Map<String, Object> mapMailInfo, Map<String, Object> mapMailParameterInfo) {
 
 		MailDefaultEvent mailDefaultEvent = null;
 		Integer eventId = null;

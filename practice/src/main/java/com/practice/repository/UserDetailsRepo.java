@@ -8,4 +8,6 @@ import com.practice.entity.Userdetails;
 
 public interface UserDetailsRepo extends JpaRepository<Userdetails, Integer> {
 	public List<Userdetails> findByIsActive(Integer isActive);
+	
+	public Userdetails findByUserCode(String userCode);
 }

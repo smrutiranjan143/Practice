@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.practice.dto.UserDTO;
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			Userdetails userdetails = new Userdetails();
 			userdetails.setUserCode(userDTO.getUserCode());
-			userdetails.setPassword(userDTO.getPassword());
+			userdetails.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
 			userdetails.setSalutationId(userDTO.getSalutationId());
 			userdetails.setFirstName(userDTO.getFirstName());
 			userdetails.setMiddleName(userDTO.getMiddleName());
@@ -92,11 +93,11 @@ public class UserServiceImpl implements UserService {
 			mapMailParameterInfo.put(PracticeConstants.USER_FULL_NAME, sb.toString());
 			mapMailParameterInfo.put(PracticeConstants.OTP, PracticeUtil.getOtp());
 
-			mailService.sendMail(mapMailInfo, mapMailParameterInfo);
+			mailService.tryToSendMail(mapMailInfo, mapMailParameterInfo);
 		} catch (Exception ex) {
 		}
 	}
-	
+
 	@Override
 	public Map<String, Object> getAllUserCode() {
 		Map<String, Object> mapIsActive = new HashMap<>();
@@ -108,7 +109,6 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("error in " + logger.getName(), e);
 		}
 		return mapIsActive;
 	}
