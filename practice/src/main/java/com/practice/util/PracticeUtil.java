@@ -19,7 +19,7 @@ public class PracticeUtil {
 		return LocalDateTime.now();
 	}
 
-	public static int getOtp() {
+	public static int generateOtp() {
 		int otp = 0;
 		try {
 			Random random = new Random();
