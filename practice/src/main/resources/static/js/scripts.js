@@ -49,6 +49,19 @@
 				document.getElementById("submit").disabled = false;
 			}
 		}
+		
+		function mobileValidate(){
+			document.getElementById("msg").innerHTML = "";	
+			var mobile=document.getElementById("mobile").value;
+			var pattern= /^\d{10}$/;
+			if(!mobile.match(pattern)){
+				document.getElementById("submit").disabled = false;
+			}
+			else{
+				document.getElementById("msg").innerHTML = "";	
+				document.getElementById("submit").disabled = true;
+			}
+		}
 	
 		function AllowOnlyNumbers(e) {
 	

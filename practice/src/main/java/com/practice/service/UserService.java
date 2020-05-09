@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.practice.dto.AddressDTO;
 import com.practice.dto.UserDTO;
 import com.practice.entity.Userdetails;
 
@@ -17,4 +18,16 @@ public interface UserService {
 	public void sendMailAfterSuccessRegistration(Userdetails userDetails);
 	
 	public Integer updateUserdetails(Integer userId, Integer isActive);
+	
+	public Userdetails loggedInUser(String userCode, String password);
+	
+	public Userdetails getUserAndPasswordByEmail(String email);
+	
+	public void sendMailForForgotPassword(Userdetails userDetails);
+	
+	public Integer resetPassword(String password, String newPassword); 
+	
+	public Integer insertAddress(AddressDTO addressDTO);
+	
+	
 }

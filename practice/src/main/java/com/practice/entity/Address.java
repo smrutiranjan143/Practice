@@ -36,8 +36,8 @@ public class Address implements Serializable {
 	@Column(name = "state_id")
 	private Integer stateId;
 
-	@Column(name = "zip_id")
-	private Integer zipId;
+	@Column(name = "zip")
+	private Integer zip;
 
 	@Column(name = "country_id")
 	private Integer countryId;
@@ -104,12 +104,12 @@ public class Address implements Serializable {
 		this.stateId = stateId;
 	}
 
-	public Integer getZipId() {
-		return zipId;
+	public Integer getZip() {
+		return zip;
 	}
 
-	public void setZipId(Integer zipId) {
-		this.zipId = zipId;
+	public void setZip(Integer zip) {
+		this.zip = zip;
 	}
 
 	public Integer getCountryId() {

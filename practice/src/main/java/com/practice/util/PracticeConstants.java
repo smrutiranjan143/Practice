@@ -10,6 +10,9 @@ public class PracticeConstants {
 	public static final String MAIL_BCC = "mailBCC";
 	public static final int MAIL_OTP = 1;
 	public static final int MAIL_EVENT_ON_USER_REGISTRATION = 2;
+	public static final int MAIL_EVENT_ON_FORGOT_PASSWORD = 3;
+	public static final String USERCODE = "USERCODE";
+	public static final String PASSWORD = "PASSWORD";
 	public static final String MAIL_SENDING_USERNAME = "nayak.rakesh138@gmail.com";
 	public static final String MAIL_SENDING_PASSWORD = "jlqxdzuqjzslvztx";
 	public static final String MAIL_SMTP_AUTH = "mail.smtp.auth";

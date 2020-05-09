@@ -8,5 +8,5 @@ import com.practice.entity.Otp;
 public interface GeneralService {
 	public Otp insertOtp(String mobile);
 	
-	public void validateOtp(String email, Integer otp);
+	public boolean validateOtp(String email, Integer otp);
 }

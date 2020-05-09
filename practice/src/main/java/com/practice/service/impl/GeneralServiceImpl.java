@@ -31,7 +31,8 @@ public class GeneralServiceImpl implements GeneralService {
 	}
 
 	@Override
-	public void validateOtp(String email, Integer otp) {
+	public boolean validateOtp(String email, Integer otp) {
+		 boolean flag =false;
 		Otp otp2 = otpRepo.validateOtp(email, otp);
 		if (otp2 != null) {
 			Userdetails ud = userService.getUserByEmail(email);
@@ -39,6 +40,8 @@ public class GeneralServiceImpl implements GeneralService {
 				userService.updateUserdetails(ud.getUserId(), PracticeConstants.ACTIVE_ROW);
 			}
 			userService.sendMailAfterSuccessRegistration(ud);
+			flag = true;
 		}
+		return flag;
 	}
 }

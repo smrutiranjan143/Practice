@@ -5,14 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.practice.dto.AddressDTO;
 import com.practice.dto.UserDTO;
+import com.practice.entity.Address;
 import com.practice.entity.Otp;
 import com.practice.entity.Salutation;
 import com.practice.entity.Userdetails;
 import com.practice.exception.ServiceException;
+import com.practice.repository.AddressRepo;
 import com.practice.repository.SalutationRepo;
 import com.practice.repository.UserDetailsRepo;
 import com.practice.service.GeneralService;
@@ -37,6 +40,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private SalutationRepo salutationRepo;
+	
+	@Autowired
+	private AddressRepo addressRepo;
 
 	@Override
 	public Integer insertUser(UserDTO userDTO) {
@@ -44,7 +50,8 @@ public class UserServiceImpl implements UserService {
 		try {
 			Userdetails userdetails = new Userdetails();
 			userdetails.setUserCode(userDTO.getUserCode());
-			userdetails.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+			//userdetails.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+			userdetails.setPassword(userDTO.getPassword());
 			userdetails.setSalutationId(userDTO.getSalutationId());
 			userdetails.setFirstName(userDTO.getFirstName());
 			userdetails.setMiddleName(userDTO.getMiddleName());
@@ -144,4 +151,93 @@ public class UserServiceImpl implements UserService {
 		mapMailParameterInfo.put(PracticeConstants.USER_FULL_NAME, sb.toString());
 		mailService.tryToSendMail(mapMailInfo, mapMailParameterInfo);
 	}
+	
+	@Override
+	public Userdetails loggedInUser(String userCode, String password) {
+		Integer IsActive =PracticeConstants.ACTIVE_ROW;
+		Userdetails userdetails = userdetailsRepo.findByUserCodeAndPasswordAndIsActive(userCode, password, IsActive);
+		if(userdetails != null) {
+			return userdetails;
+		}
+		return userdetails;
+	}
+
+	@Override
+	public Userdetails getUserAndPasswordByEmail(String email) {
+		Userdetails userdetails = userdetailsRepo.forgotPassword(email);
+		if(userdetails != null) {
+			sendMailForForgotPassword(userdetails);
+			return userdetails;
+			
+		}
+		return userdetails;
+	}
+
+	@Override
+	public void sendMailForForgotPassword(Userdetails userDetails) {
+		StringBuilder sb = new StringBuilder();
+		Map<String, Object> mapMailInfo = new HashMap<>();
+		Map<String, Object> mapMailParameterInfo = new HashMap<>();
+		
+		mapMailInfo.put(PracticeConstants.MAIL_EVENT_ID, PracticeConstants.MAIL_EVENT_ON_FORGOT_PASSWORD);
+		mapMailInfo.put(PracticeConstants.MAIL_TO, userDetails.getEmail());
+		mapMailInfo.put(PracticeConstants.MAIL_CC, null);
+		mapMailInfo.put(PracticeConstants.MAIL_BCC, null);
+		
+		if(userDetails.getSalutationId() != null && userDetails.getSalutationId() > 0) {
+			Salutation salutation = salutationRepo.findById(userDetails.getSalutationId()).orElse(null);
+			sb.append(salutation.getSalutationValue());
+		}
+		if(userDetails.getFirstName() != null && !userDetails.getFirstName().isEmpty()) {
+			sb.append(PracticeConstants.SPACE).append(userDetails.getFirstName());
+		}
+		if(userDetails.getMiddleName() != null && !userDetails.getMiddleName().isEmpty()) {
+			sb.append(PracticeConstants.SPACE).append(userDetails.getMiddleName());
+		}
+		if(userDetails.getLastName() != null && !userDetails.getLastName().isEmpty()) {
+			sb.append(PracticeConstants.SPACE).append(userDetails.getLastName());
+		}
+		
+		mapMailParameterInfo.put(PracticeConstants.USER_FULL_NAME, sb.toString());
+		mapMailParameterInfo.put(PracticeConstants.USERCODE, userDetails.getUserCode());
+		mapMailParameterInfo.put(PracticeConstants.PASSWORD, userDetails.getPassword());
+		
+		mailService.tryToSendMail(mapMailInfo, mapMailParameterInfo);
+		
+	}
+
+	@Override
+	public Integer resetPassword(String password, String newPassword) {
+		Integer updatedPassword = userdetailsRepo.updatePassword(password, newPassword);
+		if(updatedPassword != 0) {
+			return updatedPassword;
+		}
+		return updatedPassword;
+	}
+
+	@Override
+	public Integer insertAddress(AddressDTO addressDTO) {
+		Integer addressId = 0;
+		try {
+				Address address = new Address();
+				address.setAddressLine1(addressDTO.getAddressLine1());
+				address.setAddressLine1(addressDTO.getAddressLine2());
+				address.setCountryId(addressDTO.getCountryId());
+				address.setStateId(addressDTO.getStateId());
+				address.setCityId(addressDTO.getCityId());
+				address.setZip(address.getZip());
+				address.setCreateId(PracticeConstants.DEFAULT_CREATE_ID);
+				address.setCreateDate(PracticeUtil.getCurrentDateTime());
+				address.setUpdateId(PracticeConstants.DEFAULT_CREATE_ID);
+				address.setUpdateDate(PracticeUtil.getCurrentDateTime());
+				address.setIsActive(PracticeConstants.ACTIVE_ROW);
+				
+				address = addressRepo.save(address);
+				
+				addressId = address.getAddressId();
+		}catch (Exception e) {
+		}
+		return addressId;
+	}
+	
 }

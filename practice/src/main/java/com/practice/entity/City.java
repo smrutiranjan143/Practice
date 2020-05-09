@@ -52,9 +52,6 @@ public class City implements Serializable {
 	private Integer isActive;
 
 	@Transient
-	private List<Zip> zips;
-
-	@Transient
 	private List<Address> addresses;
 
 	public Integer getCityId() {
@@ -79,14 +76,6 @@ public class City implements Serializable {
 
 	public void setStateId(Integer stateId) {
 		this.stateId = stateId;
-	}
-
-	public List<Zip> getZips() {
-		return zips;
-	}
-
-	public void setZips(List<Zip> zips) {
-		this.zips = zips;
 	}
 
 	public List<Address> getAddresses() {
