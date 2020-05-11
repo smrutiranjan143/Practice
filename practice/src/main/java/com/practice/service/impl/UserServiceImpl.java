@@ -221,16 +221,17 @@ public class UserServiceImpl implements UserService {
 		try {
 				Address address = new Address();
 				address.setAddressLine1(addressDTO.getAddressLine1());
-				address.setAddressLine1(addressDTO.getAddressLine2());
-				address.setCountryId(addressDTO.getCountryId());
-				address.setStateId(addressDTO.getStateId());
+				address.setAddressLine2(addressDTO.getAddressLine2());
 				address.setCityId(addressDTO.getCityId());
-				address.setZip(address.getZip());
+				address.setStateId(addressDTO.getStateId());
+				address.setZip(addressDTO.getZip());
+				address.setCountryId(addressDTO.getCountryId());
 				address.setCreateId(PracticeConstants.DEFAULT_CREATE_ID);
 				address.setCreateDate(PracticeUtil.getCurrentDateTime());
 				address.setUpdateId(PracticeConstants.DEFAULT_CREATE_ID);
 				address.setUpdateDate(PracticeUtil.getCurrentDateTime());
 				address.setIsActive(PracticeConstants.ACTIVE_ROW);
+				address.setUserId(addressDTO.getUserId());
 				
 				address = addressRepo.save(address);
 				

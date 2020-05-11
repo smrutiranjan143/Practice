@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -23,11 +24,11 @@
 					<input type="password" name="cPassword" placeholder="Enter Confirm Password here" ng-model="userDto.cPassword" id="cPassword" maxlength="25" required onfocus="passwordCheck()" onblur="passwordSame()">
 					<span style="font-size: 20px; display: table; margin-left: auto; margin-right: auto;" id="messages"></span> 
 					<select name="salutationId" ng-model="userDto.salutationId" id="salutation" style="color:#8e8e8e;" required>
-						<option style="color:black" value="-1"> Select the Salutation </option>
-						<option style="color:black" value="1">Mr.</option>
-						<option style="color:black" value="2">Mrs.</option>
-						<option style="color:black" value="3">Miss</option>
-						<option style="color:black" value="4">Other</option>
+						<option value="-1">----Select Salutation----</option>
+                        <option value=1>Mr.</option>
+                        <option value=2>Mrs.</option>
+                        <option value=3>Miss</option>
+                        <option value=4>Others</option>
 					</select> 
 					<input type="text" name="firstName" placeholder="Enter First Name here" ng-model="userDto.firstName"id="fName" required> 
 					<input type="text" name="middleName" ng-model="userDto.middleName" placeholder="Enter Middle Name here" id="mName"> 

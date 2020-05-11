@@ -25,6 +25,9 @@
 		<div>
 		<a href="${pageContext.request.contextPath}/user/logout" class="href">Logout</a>
 		</div>
+		<div>
+		<a href="${pageContext.request.contextPath}/user/address" class="href">Address</a>
+		</div>
 	</div>
 </body>
 </html>

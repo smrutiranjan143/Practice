@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.practice.dto.AddressDTO;
 import com.practice.dto.UserDTO;
 import com.practice.entity.Userdetails;
 import com.practice.exception.ServiceException;
@@ -69,6 +70,7 @@ public class UserController {
 		return mav;
 	}
 	
+	
 	@GetMapping(value = "/register")
 	public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("user", new UserDTO());
@@ -78,7 +80,7 @@ public class UserController {
 	@PostMapping(value = "/register")
 	@ResponseBody
 	public ModelAndView insertUser(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute UserDTO userDTO) {
+			 @ModelAttribute UserDTO userDTO) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("email", userDTO.getEmail());
 		userService.insertUser(userDTO);
@@ -152,6 +154,13 @@ public class UserController {
 		Integer isActive = PracticeConstants.ACTIVE_ROW;
 		modelMap.put("countries",masterService.getCountries(isActive));
 		return "address";
+	}
+	
+	@PostMapping(value = "/address")
+	@ResponseBody
+	public Integer address(@ModelAttribute AddressDTO addressDTO) {
+		return userService.insertAddress(addressDTO);
+		
 	}
 
 	@GetMapping(value = "/getAllUserCode")

@@ -11,6 +11,7 @@ public class AddressDTO implements Serializable{
 	private Integer stateId;
 	private Integer cityId;
 	private Integer zip;
+	private Integer userId;
 	
 	public String getAddressLine1() {
 		return addressLine1;
@@ -23,6 +24,12 @@ public class AddressDTO implements Serializable{
 	}
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	public Integer getCountryId() {
 		return countryId;

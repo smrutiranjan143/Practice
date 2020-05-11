@@ -19,4 +19,5 @@ public interface MasterService {
 	
 	public Integer insertCity(City city);
 	public List<City> getCities(Integer stateId);
+	
 }

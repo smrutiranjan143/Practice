@@ -9,7 +9,7 @@ function validateOtp(){
 				var pattern = /^\d{6}$/;
 				if(!otp.match(pattern)){
 					document.getElementById("msg").style.color = "red";
-					document.getElementById("msg").innerHTML = "<Strong><i> Not a Valid Number !</strong></i>";
+					document.getElementById("msg").innerHTML = "<Strong><i> Not a Valid OTP !</strong></i>";
 					document.getElementById("submit").disabled = true;
 				}
 				else{

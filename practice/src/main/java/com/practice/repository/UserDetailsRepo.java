@@ -33,4 +33,10 @@ public interface UserDetailsRepo extends JpaRepository<Userdetails, Integer> {
 	@Modifying
 	@Query("update Userdetails u set u.password = :new_password where u.password = :password")
 	public Integer updatePassword(@Param("password")String password, @Param("new_password")String newPassword);
+	
+	
+	@Transactional
+	@Modifying
+	@Query("delete from Userdetails u where isActive = :isActive")
+	public void deleteUserdetails(@Param("isActive") Integer isActive);
 }
